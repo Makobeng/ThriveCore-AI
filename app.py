@@ -8,7 +8,7 @@ st.title('ThriveCore AI')
 st.caption('Your Business. Smarter Every Day. | Prototype v1.1')
 st.info('Prototype: AI features require a configured, reachable Llama-compatible inference endpoint. Outputs must be reviewed before use.')
 
-# Use a trusted server-side secret store when deployed; never ask end users for the key.
+# oUse a trusted server-side secret store when deployed; never ask end users for the key.
 def setting(key, default=''):
     try:
         return st.secrets.get(key, os.getenv(key, default))
@@ -38,7 +38,7 @@ with st.sidebar:
                 answer = r.json()['choices'][0]['message']['content']
                 st.success('Model returned: '+str(answer)[:120])
             except requests.RequestException as exc:
-    st.error(f"Connection failed: HTTP {exc.response.status_code}" if exc.response is not None else f"Connection failed: {type(exc).__name__}")
+                st.error(f"Connection failed: HTTP {exc.response.status_code}" if exc.response is not None else f"Connection failed: {type(exc).__name__}")
 
 def ask_llama(system, prompt):
     if not (url and key):
