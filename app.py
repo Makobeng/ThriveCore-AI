@@ -37,8 +37,8 @@ with st.sidebar:
                 r.raise_for_status()
                 answer = r.json()['choices'][0]['message']['content']
                 st.success('Model returned: '+str(answer)[:120])
-            except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
-                st.error('Connection failed. Verify endpoint, model and credentials. ('+type(exc).__name__+')')
+            except requests.RequestException as exc:
+    st.error(f"Connection failed: HTTP {exc.response.status_code}" if exc.response is not None else f"Connection failed: {type(exc).__name__}")
 
 def ask_llama(system, prompt):
     if not (url and key):
